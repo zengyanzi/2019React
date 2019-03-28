@@ -1,11 +1,24 @@
-import React from 'react';
+import React,{Component} from 'react';
 import ReactDOM,{render} from 'react-dom';
-//组件的两种定义方式，以及他们之间的区别
-// 组件定义的第一种方式 函数
-// ReactDOM 把React 元素转成真实的DOM元素并且插入到目标容器内部
-
-let Message =(props)=>{
-    console.log(props)
-    return <h1 style={props.style}>{props.msg}</h1>
+import PropTypes from 'prop-types';
+//受控组件一般指输入组件，input，表单组件
+//非受控组件
+class Input extends React.Component{
+    constructor(){
+        super();
+        this.state={val:''}
+    }
+    handleChange=(event)=>{
+       let val= event.target.value;
+       this.setState({val})
+    }
+        render() {
+        return(
+            <div>
+                <p>{this.state.val}</p>
+                <input onChange={this.handleChange} type ="text"  value={this.state.val}/>
+            </div>
+        )
+    }
 }
-render(<Message msg="hello" id="5"  style={{color:"red"}} hobby={['a','b']}/>,window.app);
+render(<Input/>,window.app);
