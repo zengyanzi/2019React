@@ -1,39 +1,21 @@
 import React,{Component} from 'react';
 import ReactDOM,{render} from 'react-dom';
 import PropTypes from 'prop-types';
-//受控组件一般指输入组件，input，表单组件
-//非受控组件
+
+//非受控组件 value 不受state控制
 class Sum extends React.Component{
-    constructor(){
-        super();
-        this.state={
-            a:0,
-            b:0,
-            result:0
-        }
-    }
-    handleChangeA=(event)=>{
-        this.setState(
-            {
-                a:parseInt(event.target.value),
-                result:parseInt(event.target.value)+this.state.b
-            }
-        )
-    }
-    handleChangeB=(event)=>{
-        this.setState(
-            {
-                b:parseInt(event.target.value),
-                result:parseInt(event.target.value)+this.state.a
-            }
-        )
+    handleChnage=(event)=>{
+        let a = parseInt(this.a.value);
+        let b  =parseInt(this.b.value);
+        this.result.value=a+b;
     }
         render() {
         return(
-            <div>
-               <input type="text" value={this.state.a} onChange={this.handleChangeA}/>+
-                <input type="text" value={this.state.b} onChange={this.handleChangeB}/>=
-                <input type="text" value={this.state.result}/>
+            //ref等于一个函数，当元素被挂载到页面中回立刻调用此函数，并传入渲染后的DOM元素 这里的this代表当前组件实例整个Sum组件
+            <div onChange={this.handleChnage}>
+               <input ref={ref=>this.a=ref} type="text"/>+
+                <input ref={ref=>this.b=ref} type="text"  />=
+                <input ref={ref=>this.result=ref} type="text" />
             </div>
         )
     }
