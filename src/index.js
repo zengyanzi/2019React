@@ -3,22 +3,39 @@ import ReactDOM,{render} from 'react-dom';
 import PropTypes from 'prop-types';
 //受控组件一般指输入组件，input，表单组件
 //非受控组件
-class Input extends React.Component{
+class Sum extends React.Component{
     constructor(){
         super();
-        this.state={val:''}
+        this.state={
+            a:0,
+            b:0,
+            result:0
+        }
     }
-    handleChange=(event)=>{
-       let val= event.target.value;
-       this.setState({val})
+    handleChangeA=(event)=>{
+        this.setState(
+            {
+                a:parseInt(event.target.value),
+                result:parseInt(event.target.value)+this.state.b
+            }
+        )
+    }
+    handleChangeB=(event)=>{
+        this.setState(
+            {
+                b:parseInt(event.target.value),
+                result:parseInt(event.target.value)+this.state.a
+            }
+        )
     }
         render() {
         return(
             <div>
-                <p>{this.state.val}</p>
-                <input onChange={this.handleChange} type ="text"  value={this.state.val}/>
+               <input type="text" value={this.state.a} onChange={this.handleChangeA}/>+
+                <input type="text" value={this.state.b} onChange={this.handleChangeB}/>=
+                <input type="text" value={this.state.result}/>
             </div>
         )
     }
 }
-render(<Input/>,window.app);
+render(<Sum/>,window.app);
