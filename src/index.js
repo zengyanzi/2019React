@@ -1,23 +1,51 @@
 import React,{Component} from 'react';
 import ReactDOM,{render} from 'react-dom';
-import PropTypes from 'prop-types';
-
-//非受控组件 value 不受state控制
-class Sum extends React.Component{
-    handleChnage=(event)=>{
-        let a = parseInt(this.a.value);
-        let b  =parseInt(this.b.value);
-        this.result.value=a+b;
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+import { Card,ButtonToolbar,Button  } from 'react-bootstrap';
+//单向数据流
+class Panel extends React.Component{
+    constructor(){
+        super();
+        this.state={color:'black'}
     }
-        render() {
+    render() {
         return(
-            //ref等于一个函数，当元素被挂载到页面中回立刻调用此函数，并传入渲染后的DOM元素 这里的this代表当前组件实例整个Sum组件
-            <div onChange={this.handleChnage}>
-               <input ref={ref=>this.a=ref} type="text"/>+
-                <input ref={ref=>this.b=ref} type="text"  />=
-                <input ref={ref=>this.result=ref} type="text" />
+            <div>
+                <ButtonToolbar>
+                    <Button variant="primary" onClick={()=>{this.setState({color:"green"})}}>Green</Button>
+                    <Button variant="secondary">Red</Button>
+                </ButtonToolbar>
+                <Card >
+                    <PanelHead head={this.props.head} color={this.state.color}/>
+                    <PanelBody body={this.props.body}/>
+                    <PanelFooter foot={this.props.foot}/>
+                </Card>
             </div>
+
         )
     }
 }
-render(<Sum/>,window.app);
+class PanelHead extends  React.Component{
+    render() {
+        return(
+            <Card.Body style={{color:this.props.color}}>{this.props.head}</Card.Body>
+        )
+    }
+}
+class PanelBody extends  React.Component{
+    render() {
+        return(
+            <Card.Body>{this.props.body}</Card.Body>
+        )
+    }
+}
+class PanelFooter extends  React.Component{
+    render() {
+        return(
+            <Card.Body>{this.props.foot}</Card.Body>
+        )
+    }
+}
+
+render(<Panel head="head"body="body"foot="foot"/>,window.app);
