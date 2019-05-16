@@ -1,10 +1,12 @@
 import React,{Component} from 'react';
+import './MessageBox.css';
+import Message from './Message';
 export default class MessageList extends Component{
     render(){
         return(
             <ul className="list-group">
                 {this.props.messages.map((message,index)=>(
-                        <li key={index} className="list-group-item">{message.username}:{message.content}<span className="pull-right">{message.createAt.toLocaleDateString()}</span></li>
+                    <Message message={message} index={index} removeMessage={this.props.removeMessage}/>
                     )
                 )}
             </ul>

@@ -5,8 +5,18 @@ export default class MessageBox extends Component{
     constructor(){
         super();
         this.state={
-            message:[{username:'Jenny',content:'Hello World',createAt:new Date()}]
+            messages:[{username:'Jenny',content:'Hello World',createAt:new Date()}]
         };
+    }
+    addMessage=(message)=>{
+        let messages =[...this.state.messages,message]
+        this.setState({
+            messages
+        })
+    }
+    removeMessage=(index)=>{
+        this.state.messages.splice(index,1)
+        this.setState({messages:[...this.state.messages]})
     }
     render(){
 
@@ -19,10 +29,10 @@ export default class MessageBox extends Component{
                                 <h2>Welcome to Message </h2>
                             </div>
                             <div className="panel-body">
-                                <MessageList messages={this.state.message} />
+                                <MessageList  messages={this.state.messages} removeMessage={this.removeMessage} />
                             </div>
                             <div className="panel-footer">
-                               <MessageForm/>
+                               <MessageForm addMessage={this.addMessage}  />
                             </div>
                         </div>
                     </div>
