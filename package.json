@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.4.1",
+    "jquery": "^3.4.1",
     "jsonp": "^0.2.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
