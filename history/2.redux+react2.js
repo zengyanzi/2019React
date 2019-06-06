@@ -17,12 +17,6 @@ const DECREASE="DECREASE";
         }
     };
 let store=createStore(reducer);
-let increase =(amount)=>({type:INCREASE,amount})
-
-
-let decrease =(amount)=>({type:DECREASE,amount})
-
-
 class Counter extends React.Component{
     constructor(){
         super();
@@ -43,8 +37,8 @@ class Counter extends React.Component{
         return(
             <div>
                 <p>{this.state.number}</p>
-                <button onClick={()=>store.dispatch(increase(2))}>+</button>
-                <button onClick={()=>store.dispatch(decrease(2))}>-</button>
+                <button onClick={()=>store.dispatch({type:INCREASE,amount:2})}>+</button>
+                <button onClick={()=>store.dispatch({type:DECREASE,amount:2})}>-</button>
             </div>
         )
     }
