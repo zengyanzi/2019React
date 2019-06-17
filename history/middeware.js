@@ -16,32 +16,17 @@ let counter =(state=0,action)=>{
         return state;
     }
 }
-/*let logger =store =>next =>action =>{
+let logger =store =>next =>action =>{
      console.log('before ',store.getState());
     console.log(action);
      next(action);
     console.log('after ',store.getState());
-}*/
-
-let thunk = store=>next=>action=>{
-    if (typeof  action=='function')
-        return action(next);
-    return next(action);
 }
-let store=applyMiddleware(thunk)(createStore)(counter);
+
+let store=applyMiddleware(logger)(createStore)(counter);
 console.log(store.getState())
-store.subscribe(function (){
-    console.log(store.getState());
-} )
-// store.dispatch({type:'ADD'});
-// store.dispatch({type:'SUB'});
-store.dispatch(function (dispatch) {
-    setTimeout(function () {
-        dispatch({type:'ADD'});
-
-    },3000)
-
-});
+store.dispatch({type:'ADD'});
+store.dispatch({type:'SUB'});
 
 
 //ReactDOM.render(,document.querySelector("#root"));
