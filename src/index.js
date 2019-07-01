@@ -23,25 +23,37 @@ let counter =(state=0,action)=>{
     console.log('after ',store.getState());
 }*/
 
-let thunk = store=>next=>action=>{
+let promise =store=>next=>action=>{
+    if (isPromise(action)){
+       return action.then((data)=>next(data));
+    }
+    next(action);
+}
+let isPromise= obj=>obj.then;
+/*let thunk = store=>next=>action=>{
     if (typeof  action=='function')
         return action(next);
     return next(action);
-}
-let store=applyMiddleware(thunk)(createStore)(counter);
+}*/
+let store=applyMiddleware(promise)(createStore)(counter);
 console.log(store.getState())
 store.subscribe(function (){
     console.log(store.getState());
 } )
 // store.dispatch({type:'ADD'});
 // store.dispatch({type:'SUB'});
-store.dispatch(function (dispatch) {
+/*store.dispatch(function (dispatch) {
     setTimeout(function () {
         dispatch({type:'ADD'});
 
     },3000)
 
-});
+});*/
+store.dispatch(new Promise(function(resolve,reject){
+    setTimeout(function (){
+        resolve({type:'ADD'});
+    },3000 );
+}));
 
 
 //ReactDOM.render(,document.querySelector("#root"));
