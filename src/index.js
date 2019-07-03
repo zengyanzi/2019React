@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {
-    HashRouter  as Router,
-    Route
-} from 'react-router-dom';
+import App from './component/App';
+/*
 function Root(){
     return<h1> Root </h1>
 }
@@ -16,14 +14,7 @@ function User(){
 function Profile(){
     return<h1> Profile </h1>
 }
+*/
 
-ReactDom.render(
-    <Router>
-   <div>
-       <Route path="/" component={Root}/>
-       <Route path="/home" component={Home}/>
-       <Route path="/user" component={User}/>
-       <Route path="/profile" component={Profile}/>
-   </div>
-    </Router>,document.querySelector('#root')
+ReactDom.render( App,document.querySelector('#root')
 )
